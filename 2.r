@@ -12,3 +12,17 @@ data_sf <- st_as_sf(data)
 # 使用ggplot2绘制地图
 ggplot() +
   geom_sf(data = data_sf)
+
+dv_zone1 <- read_sf(dsn = "G342020合肥高新技术产业开发区区块二.txt")
+dv_zone2 <- read_sf(dsn = "G342020合肥高新技术产业开发区区块一.txt")
+dv_zone1_sf <- st_as_sf(dv_zone1)
+dv_zone2_sf <- st_as_sf(dv_zone2)
+
+df <- read.table("hefei.txt", header = TRUE, sep = "\t")
+points <- st_as_sf(df, coords = c("lng", "lat"), crs = 4326)
+# 使用ggplot2绘制地图
+ggplot() +
+  geom_sf(data = data_sf)+  geom_sf(data = points, color = "blue",alpha = 0.5)
+  geom_sf(data = dv_zone1_sf, fill = "red", alpha = 0.5) +
+  geom_sf(data = dv_zone2_sf, fill = "red", alpha = 0.5)
+ 
